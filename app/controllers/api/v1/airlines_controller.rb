@@ -1,7 +1,8 @@
 module Api
   module V1
     class AirlinesController < ApplicationController
-      before_action :set_airline, except: [:index, :create]
+      before_action :set_airline, only: [:show, :update, :destroy]
+      protect_from_forgery with: :null_session
 
       def index
         @airlines = Airline.all
@@ -14,10 +15,10 @@ module Api
       end
 
       def create
-        @airline = Airline.new(airline_params)
+        airline = Airline.new(airline_params)
 
-        if @airline.save
-          render json: AirlineSerializer.new(@airline).serialized_json
+        if airline.save
+          render json: AirlineSerializer.new(airline).serializable_hash.to_json
         else
           render json: {error: @airline.errors.messages}, status: 422
         end
