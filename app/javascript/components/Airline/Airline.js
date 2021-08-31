@@ -45,8 +45,6 @@ const Airline = (props) => {
     e.preventDefault()
 
     setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
-
-    console.log('Review:', review)
   }
 
   const handleSubmit = (e) => {
@@ -63,6 +61,12 @@ const Airline = (props) => {
       setReview({title: '', description: '', score: 0})
     })
     .catch(resp => {})
+  }
+
+  const setRating = (score, e) => {
+    // e.preventDefault()
+
+    setReview({...review, score})
   }
   
   return (
@@ -84,6 +88,7 @@ const Airline = (props) => {
             <ReviewForm 
               handleChange={handleChange}
               handleSubmit={handleSubmit}
+              setRating={setRating}
               attributes={airline.data.attributes}
               review={review}
             />

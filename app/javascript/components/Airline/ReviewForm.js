@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import Gray from './Stars/Gray'
+import Hover from './Stars/Hover'
+import Selected from './Stars/Selected'
 
 const RatingContainer = styled.div`
   text-align: center;
@@ -21,8 +24,24 @@ const RatingBox = styled.div`
     display: none;
   }
 
-  lable {
+  label {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,${Gray}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+  }
 
+  input:checked ~ label,
+  input:checled ~ label ~ label {
+    background-image: url("data:image/svg+xml;charset=UTF-8,${Selected}");
+  }
+
+  input:not(checked) ~ label:hover,
+  input:not(checked) ~ label:hover ~ label {
+    background-image: url("data:image/svg+xml;charset=UTF-8,${Hover}");
   }
 `
 
@@ -32,9 +51,9 @@ const ReviewForm = (props) => {
   const ratingOptions = [5,4,3,2,1].map( (score, index) => {
     return (
       <Fragment>
-        <input type="radio" value={score} name="rating" onChange={() => console.log('seleceted:', score)} id={`raiting-${score}`}></input>
-        <label></label>
-      </Fragment>
+        <input type="radio" value={score} checked={props.review.score == score} name="rating" onChange={() => console.log('seleceted:', score)} id={`raiting-${score}`}></input>
+        <label onClick={props.setRating.bind(this, score)}></label>
+      </Fragment> 
     )
   })
 
@@ -51,9 +70,9 @@ const ReviewForm = (props) => {
         <div className="field">
           <RatingContainer>
             <div className="raiting-title-text">Rate This Airline</div>
-            <div className="raitingBox">
+            <RatingBox>
               {ratingOptions}
-            </div>
+            </RatingBox>
           </RatingContainer>
         </div>
          <button type="submit">Submit your review</button>
