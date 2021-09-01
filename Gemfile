@@ -25,6 +25,7 @@ gem 'jsonapi-serializer'
 # Use Active pStorage variant
 gem 'pry', '~> 0.13.1'
 # gem 'image_processing', '~> 1.2'
+gem "font-awesome-rails"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
