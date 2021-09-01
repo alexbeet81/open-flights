@@ -1,5 +1,5 @@
 import React from 'react'
-import Rating from '../Rating/Raiting'
+import Rating from '../Rating/Rating'
 import styled from 'styled-components'
 
 const Card = styled.div`
@@ -31,7 +31,7 @@ const {score, title, description} = props.attributes
   return (
     <Card>
       <RatingContainer>
-        <Rating socre={score}/>
+        <Rating score={score}/>
       </RatingContainer>
       <Title>{title}</Title>
       <Description>{description}</Description>
